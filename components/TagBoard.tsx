@@ -6,12 +6,12 @@ import { Button } from "@/components/ui/button"
 
 const TagBoard = () => {
 
-	const initialTags = ['travel', 'destination', 'famous place', 'etc.'];
+	const initialTags = ['travel', 'destination', 'famous place', 'tourism', 'vacation', 'holiday', 'tourist', 'tour', 'traveler'];
 
 	const [textValue, setTextValue] = useState<string>('');
 
 	const renderTags = () => {
-		return <div className='flex space-x-2'>
+		return <div className='flex flex-wrap gap-3'>
 			{initialTags.map((tag) => (
 				<Button variant="outline" onClick={() => handleTagClick(tag)}>
 					{tag}
@@ -21,11 +21,14 @@ const TagBoard = () => {
 	};
 
 	const handleTagClick = (tag: string) => {
-		if (textValue.includes(tag)) {
-			const newTextValue = textValue.replace(tag, '').trim();
+		const tags = textValue.split(',').map((t) => t.trim()); // Split existing tags
+
+		if (tags.includes(tag)) {
+			const updatedTags = tags.filter((t) => t !== tag); // Remove the tag
+			const newTextValue = updatedTags.length > 0 ? updatedTags.join(', ') : ''; // Update the text without the removed tag
 			setTextValue(newTextValue);
 		} else {
-			const newTextValue = `${textValue} ${tag}`.trim();
+			const newTextValue = textValue ? `${textValue}, ${tag}` : tag; // Add the tag
 			setTextValue(newTextValue);
 		}
 	};
