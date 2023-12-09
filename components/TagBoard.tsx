@@ -51,19 +51,9 @@ const TagBoard = () => {
 		'Travel Safety',];
 
 	const [textValue, setTextValue] = useState<string>('');
-	const [editMode, setEditMode] = useState<boolean>(false);
+	const [deleteMode, setDeleteMode] = useState<boolean>(false);
 	const [tags, setTags] = useState<string[]>(initialTags);
-
-	// const renderTags = () => {
-	// 	return <div className='flex flex-wrap gap-3'>
-	// 		{initialTags.map((tag) => (
-	// 			<Button variant="outline" onClick={() => handleTagClick(tag)}>
-	// 				{tag}
-	// 			</Button>
-	// 		))}
-	// 	</div>
-	// };
-
+	const [addTagValue, setAddTagValue] = useState<string>('');
 
 	const handleTagClick = (tag: string) => {
 		const tags = textValue.split(',').map((t) => t.trim()); // Split existing tags
@@ -91,13 +81,25 @@ const TagBoard = () => {
 		navigator.clipboard.writeText(textValue);
 	};
 
-	const handleEditClick = () => {
-		setEditMode(!editMode);
+	const handleDeleteClick = () => {
+		setDeleteMode(!deleteMode);
 	};
 
 	const handleTagDelete = (tagToDelete: string) => {
 		const updatedTags = tags.filter((tag) => tag !== tagToDelete);
 		setTags(updatedTags);
+	};
+
+	const handleAddTagClick = () => {
+		if (addTagValue) {
+			const updatedTags = [...tags, addTagValue];
+			setTags(updatedTags);
+			setAddTagValue('');
+		}
+	};
+
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setAddTagValue(event.target.value);
 	};
 
 	const renderTags = () => {
@@ -110,7 +112,7 @@ const TagBoard = () => {
 				>
 					{tag}
 				</Button>
-				{editMode && (
+				{deleteMode && (
 					<button
 						className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-full text-sm ml-1"
 						onClick={() => handleTagDelete(tag)}
@@ -127,13 +129,25 @@ const TagBoard = () => {
 		<div className="grid grid-cols-12 gap-4">
 
 			<div className="col-span-9">
+				<p className='font-bold mb-4'>Travel 🧳</p>
 
-				{/* Button Edit */}
-				<div>
-					<Button className='mb-2' onClick={handleEditClick}>
-						{editMode ? 'Done' : 'Edit'}
+				{/* Input field and Button to add tags */}
+				<div className="flex mb-4">
+					<input
+						type="text"
+						value={addTagValue}
+						onChange={handleInputChange}
+						className="border rounded px-2 py-1 mr-2"
+					/>
+					<Button onClick={handleAddTagClick}>
+						Add
 					</Button>
 				</div>
+
+				<Button className='mb-2' onClick={handleDeleteClick} variant="destructive">
+					{deleteMode ? 'Done' : 'Delete tags'}
+				</Button>
+
 
 				{/* Tags */}
 				{renderTags()}
