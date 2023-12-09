@@ -102,7 +102,7 @@ const TagBoard = () => {
 
 	const renderTags = () => {
 		return tags.map((tag) => (
-			<div key={tag} className="inline-block">
+			<div key={tag} className="inline-block p-1" >
 
 				<Button
 					variant={`${textValue.split(',').map((t) => t.trim()).includes(tag) ? 'default' : 'outline'}`}
@@ -129,9 +129,11 @@ const TagBoard = () => {
 			<div className="col-span-9">
 
 				{/* Button Edit */}
-				<Button className='mb-2' onClick={handleEditClick}>
-					{editMode ? 'Done' : 'Edit'}
-				</Button>
+				<div>
+					<Button className='mb-2' onClick={handleEditClick}>
+						{editMode ? 'Done' : 'Edit'}
+					</Button>
+				</div>
 
 				{/* Tags */}
 				{renderTags()}
