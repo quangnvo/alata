@@ -103,7 +103,14 @@ const TagBoard = () => {
 	const renderTags = () => {
 		return tags.map((tag) => (
 			<div key={tag} className="inline-block">
-				{/* {editMode && (
+
+				<Button
+					variant={`${textValue.split(',').map((t) => t.trim()).includes(tag) ? 'default' : 'outline'}`}
+					onClick={() => handleTagClick(tag)}
+				>
+					{tag}
+				</Button>
+				{editMode && (
 					<button
 						className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-full text-sm ml-1"
 						onClick={() => handleTagDelete(tag)}
@@ -111,29 +118,7 @@ const TagBoard = () => {
 						X
 					</button>
 				)}
-				<button
-					className={`${textValue.split(',').map((t) => t.trim()).includes(tag) ? 'font-bold bg-black' : ''
-						} bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded inline-block`}
-					onClick={() => handleTagClick(tag)}
-				>
-					{tag}
-				</button> */}
 
-				<button
-					className={`relative ${textValue.split(',').map((t) => t.trim()).includes(tag) ? 'font-bold bg-black' : ''
-						} bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded inline-block`}
-					onClick={() => handleTagClick(tag)}
-				>
-					{tag}
-					{editMode && (
-						<button
-							className="absolute top-0 right-0 bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-full text-sm"
-							onClick={() => handleTagDelete(tag)}
-						>
-							X
-						</button>
-					)}
-				</button>
 			</div>
 		));
 	};
