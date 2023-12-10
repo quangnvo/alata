@@ -129,6 +129,14 @@ const TagBoard = () => {
 		<div className="grid grid-cols-12 gap-4">
 
 			<div className="col-span-9">
+				<div>
+
+					<Button>
+						Add new category
+					</Button>
+				</div>
+
+
 				<p className='font-bold mb-4'>Travel 🧳</p>
 
 				{/* Input field and Button to add tags */}
@@ -140,12 +148,12 @@ const TagBoard = () => {
 						className="border rounded px-2 py-1 mr-2"
 					/>
 					<Button onClick={handleAddTagClick}>
-						Add
+						Add tag 🏷️
 					</Button>
 				</div>
 
 				<Button className='mb-2' onClick={handleDeleteClick} variant="destructive">
-					{deleteMode ? 'Done' : 'Delete tags'}
+					{deleteMode ? 'Done' : 'Delete tag 🗑️'}
 				</Button>
 
 
