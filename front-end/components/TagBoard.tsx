@@ -11,6 +11,7 @@ const TagBoard = () => {
 				</Button>
 				<TagSection />
 			</div>
+
 			<div className="col-span-3">
 				<TagTextAddedArea />
 			</div>

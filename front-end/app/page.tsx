@@ -12,6 +12,7 @@ export default function Home() {
 
   return (
     <>
+
       <div style={{ maxWidth: 1200, marginInline: "auto", padding: 20 }}>
         <div style={{ marginBottom: "4rem", textAlign: "center" }}>
           <h4 style={{ marginBottom: 16 }}>{count}</h4>
@@ -25,6 +26,7 @@ export default function Home() {
           <button onClick={() => dispatch(reset())}>reset</button>
         </div>
       </div>
+
       <div className="container my-20">
         <TagBoard />
       </div>

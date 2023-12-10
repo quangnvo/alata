@@ -1,59 +1,18 @@
 "use client"
 
-import React from 'react'
-
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+
 
 const TagSection = () => {
 
-    const initialTags = ['Beach',
-        'Adventure',
-        'Hiking',
-        'Camping',
-        'City Break',
-        'Culture',
-        'Foodie',
-        'Solo Travel',
-        'Family Travel',
-        'Luxury Travel',
-        'Budget Travel',
-        'Backpacking',
-        'Road Trip',
-        'Sightseeing',
-        'Wildlife',
-        'National Parks',
-        'Mountains',
-        'Islands',
-        'Desert',
-        'Historical Sites',
-        'Local Cuisine',
-        'Relaxation',
-        'Exotic Destinations',
-        'Water Activities',
-        'Winter Sports',
-        'Tropical Getaways',
-        'Ecotourism',
-        'Photography',
-        'Cultural Festivals',
-        'Travel Tips',
-        'Travel Planning',
-        'Travel Gadgets',
-        'Travel Hacks',
-        'Travel Insurance',
-        'Airbnb',
-        'Hotels',
-        'Hostels',
-        'Resorts',
-        'Cruise',
-        'Train Travel',
-        'Backcountry Travel',
-        'Travel Health',
-        'Travel Safety',];
+    const { tagSection } = useAppSelector((state) => state.tagReducer);
+    const dispatch = useAppDispatch();
 
     const [textValue, setTextValue] = useState<string>('');
     const [deleteMode, setDeleteMode] = useState<boolean>(false);
-    const [tags, setTags] = useState<string[]>(initialTags);
+    const [tags, setTags] = useState<string[]>(tagSection[0].tags);
     const [addTagValue, setAddTagValue] = useState<string>('');
 
     const handleTagClick = (tag: string) => {
@@ -66,20 +25,6 @@ const TagSection = () => {
             const newTextValue = textValue ? `${textValue}, ${tag}` : tag; // Add the tag
             setTextValue(newTextValue);
         }
-    };
-
-    const textAreaStyle = {
-        minWidth: '300px', // Default minimum width
-        minHeight: '500px', // Default minimum height
-        height: 'auto', // Allows vertical expansion
-    };
-
-    const handleTextAreaChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setTextValue(event.target.value);
-    };
-
-    const handleCopyToClipboard = () => {
-        navigator.clipboard.writeText(textValue);
     };
 
     const handleDeleteClick = () => {
@@ -127,7 +72,7 @@ const TagSection = () => {
     };
 
     return (
-        <div className='p-4 border border-gray-300 rounded-md'>
+        <div className='p-4 border border-gray-300 rounded-md mb-8'>
 
             <p className='font-bold mb-4 text-2xl'>Travel 🧳</p>
 
