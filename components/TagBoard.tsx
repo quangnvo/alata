@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
-
+import TagSection from './TagSection';
 
 const TagBoard = () => {
 
@@ -129,36 +129,12 @@ const TagBoard = () => {
 		<div className="grid grid-cols-12 gap-4">
 
 			<div className="col-span-9">
-				<div>
-
-					<Button>
-						Add new category
-					</Button>
-				</div>
-
-
-				<p className='font-bold mb-4'>Travel 🧳</p>
-
-				{/* Input field and Button to add tags */}
-				<div className="flex mb-4">
-					<input
-						type="text"
-						value={addTagValue}
-						onChange={handleInputChange}
-						className="border rounded px-2 py-1 mr-2"
-					/>
-					<Button onClick={handleAddTagClick}>
-						Add tag 🏷️
-					</Button>
-				</div>
-
-				<Button className='mb-2' onClick={handleDeleteClick} variant="destructive">
-					{deleteMode ? 'Done' : 'Delete tag 🗑️'}
+				<Button className='mb-5'>
+					Add new category
 				</Button>
 
+				<TagSection />
 
-				{/* Tags */}
-				{renderTags()}
 			</div>
 
 			{/* Text */}
