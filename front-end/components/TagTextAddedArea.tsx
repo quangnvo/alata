@@ -12,9 +12,15 @@ const TagTextAddedArea = () => {
         navigator.clipboard.writeText(tagTextAdded);
     };
 
+    const tags = tagTextAdded.split(',').map(t => t.trim());
+
     return (
         <div className='flex flex-col gap-3'>
-            <p className='font-bold mb-2'>Tag text</p>
+            <p className='mb-2'>Tag text:
+                <span className='font-bold'>
+                    {tags[0] == "" ? "0" : tags.length}
+                </span>
+            </p>
 
             <Button onClick={handleCopyToClipboard}>
                 Copy text

@@ -3,17 +3,23 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { decrement, increment, reset } from "@/redux/features/counterSlice";
 import { addTagText } from "@/redux/features/tagSlice";
 
-const TagSection = () => {
+type TagSectionProps = {
+    section: {
+        sectionName: string;
+        tags: string[];
+    };
+};
 
-    const { tagSection, tagTextAdded } = useAppSelector((state) => state.tagReducer);
+
+const TagSection: React.FC<TagSectionProps> = ({ section }) => {
+
+    const { tagTextAdded } = useAppSelector((state) => state.tagReducer);
     const dispatch = useAppDispatch();
 
-    const [textValue, setTextValue] = useState<string>('');
     const [deleteMode, setDeleteMode] = useState<boolean>(false);
-    const [tags, setTags] = useState<string[]>(tagSection[0].tags);
+    const [tags, setTags] = useState<string[]>(section.tags);
     const [addTagValue, setAddTagValue] = useState<string>('');
 
     const handleAddTagClick = () => {
@@ -21,9 +27,18 @@ const TagSection = () => {
     };
 
     const handleTagClick = (tag: string) => {
-        dispatch(addTagText(tag));
+        // Split the string into an array of tags
+        let tags = tagTextAdded ? tagTextAdded.split(',').map(t => t.trim()) : [];
+        if (tags.includes(tag)) {
+            // If the tag is already present, remove it
+            tags = tags.filter(t => t !== tag);
+        } else {
+            // If the tag is not present, add it
+            tags.push(tag);
+        }
+        // Join the array back into a string and update the Redux state
+        dispatch(addTagText(tags.join(', ')));
     };
-
 
     const handleDeleteClick = () => {
         alert('Delete mode');
@@ -42,11 +57,12 @@ const TagSection = () => {
             <div key={tag} className="inline-block p-1" >
 
                 <Button
-                    variant={`${textValue.split(',').map((t) => t.trim()).includes(tag) ? 'default' : 'outline'}`}
                     onClick={() => handleTagClick(tag)}
+                    variant={`${tagTextAdded.split(',').map((t) => t.trim()).includes(tag) ? 'default' : 'outline'}`}
                 >
                     {tag}
                 </Button>
+
                 {deleteMode && (
                     <button
                         className="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded-full text-sm ml-1"
@@ -63,7 +79,7 @@ const TagSection = () => {
     return (
         <div className='p-4 border border-gray-300 rounded-md mb-8'>
 
-            <p className='font-bold mb-4 text-2xl'>Travel 🧳</p>
+            <p className='font-bold mb-4 text-2xl'>{section.sectionName}</p>
 
             {/* Input field and Button to add tags */}
             <div className="flex mb-4">
@@ -74,13 +90,13 @@ const TagSection = () => {
                     className="border rounded px-2 py-1 mr-2"
                 />
                 <Button onClick={handleAddTagClick}>
-                    Add new tag 🏷️
+                    Add new tag
                 </Button>
             </div>
 
             <div>
                 <Button className='mb-2' onClick={handleDeleteClick} variant="destructive">
-                    {deleteMode ? 'Done' : 'Delete tag 🗑️'}
+                    {deleteMode ? 'Done' : 'Delete tag'}
                 </Button>
             </div>
 
@@ -92,4 +108,4 @@ const TagSection = () => {
     )
 }
 
-export default TagSection
+export default TagSection;
