@@ -51,15 +51,21 @@ const initialState = {
 			],
 		},
 	],
-	tagTextAdded: 'gdgdgd',
+	tagTextAdded: '',
 }
 
 const tagSlice = createSlice({
 	name: 'tagReducer',
 	initialState,
-	reducers: {},
+	reducers: {
+		addTagText: (state, action) => {
+			console.log('đã vào reducer')
+			state.tagTextAdded = action.payload
+			console.log('state.tagTextAdded', state.tagTextAdded)
+		},
+	},
 })
 
-export const {} = tagSlice.actions
+export const { addTagText } = tagSlice.actions
 
 export default tagSlice.reducer

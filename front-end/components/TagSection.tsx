@@ -3,11 +3,12 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-
+import { decrement, increment, reset } from "@/redux/features/counterSlice";
+import { addTagText } from "@/redux/features/tagSlice";
 
 const TagSection = () => {
 
-    const { tagSection } = useAppSelector((state) => state.tagReducer);
+    const { tagSection, tagTextAdded } = useAppSelector((state) => state.tagReducer);
     const dispatch = useAppDispatch();
 
     const [textValue, setTextValue] = useState<string>('');
@@ -15,33 +16,21 @@ const TagSection = () => {
     const [tags, setTags] = useState<string[]>(tagSection[0].tags);
     const [addTagValue, setAddTagValue] = useState<string>('');
 
-    const handleTagClick = (tag: string) => {
-        const tags = textValue.split(',').map((t) => t.trim()); // Split existing tags
-        if (tags.includes(tag)) {
-            const updatedTags = tags.filter((t) => t !== tag); // Remove the tag
-            const newTextValue = updatedTags.length > 0 ? updatedTags.join(', ') : ''; // Update the text without the removed tag
-            setTextValue(newTextValue);
-        } else {
-            const newTextValue = textValue ? `${textValue}, ${tag}` : tag; // Add the tag
-            setTextValue(newTextValue);
-        }
+    const handleAddTagClick = () => {
+
     };
 
+    const handleTagClick = (tag: string) => {
+        dispatch(addTagText(tag));
+    };
+
+
     const handleDeleteClick = () => {
-        setDeleteMode(!deleteMode);
+        alert('Delete mode');
     };
 
     const handleTagDelete = (tagToDelete: string) => {
-        const updatedTags = tags.filter((tag) => tag !== tagToDelete);
-        setTags(updatedTags);
-    };
-
-    const handleAddTagClick = () => {
-        if (addTagValue) {
-            const updatedTags = [...tags, addTagValue];
-            setTags(updatedTags);
-            setAddTagValue('');
-        }
+        alert('Delete tag: ' + tagToDelete);
     };
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,16 +74,20 @@ const TagSection = () => {
                     className="border rounded px-2 py-1 mr-2"
                 />
                 <Button onClick={handleAddTagClick}>
-                    Add tag 🏷️
+                    Add new tag 🏷️
                 </Button>
             </div>
 
-            <Button className='mb-2' onClick={handleDeleteClick} variant="destructive">
-                {deleteMode ? 'Done' : 'Delete tag 🗑️'}
-            </Button>
+            <div>
+                <Button className='mb-2' onClick={handleDeleteClick} variant="destructive">
+                    {deleteMode ? 'Done' : 'Delete tag 🗑️'}
+                </Button>
+            </div>
 
             {/* Tags */}
-            {renderTags()}
+            <div>
+                {renderTags()}
+            </div>
         </div>
     )
 }
