@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addTagText } from "@/redux/features/tagSlice";
+import { addTagText, addTag } from "@/redux/features/tagSlice";
 
 type TagSectionProps = {
     section: {
@@ -19,11 +19,13 @@ const TagSection: React.FC<TagSectionProps> = ({ section }) => {
     const dispatch = useAppDispatch();
 
     const [deleteMode, setDeleteMode] = useState<boolean>(false);
-    const [tags, setTags] = useState<string[]>(section.tags);
     const [addTagValue, setAddTagValue] = useState<string>('');
 
     const handleAddTagClick = () => {
-
+        if (addTagValue) {
+            dispatch(addTag({ sectionName: section.sectionName, newTag: addTagValue }));
+            setAddTagValue('');
+        }
     };
 
     const handleTagClick = (tag: string) => {
@@ -53,7 +55,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section }) => {
     };
 
     const renderTags = () => {
-        return tags.map((tag) => (
+        return section.tags.map((tag) => (
             <div key={tag} className="inline-block p-1" >
 
                 <Button
@@ -109,3 +111,4 @@ const TagSection: React.FC<TagSectionProps> = ({ section }) => {
 }
 
 export default TagSection;
+

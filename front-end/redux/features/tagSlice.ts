@@ -47,7 +47,13 @@ const tagSlice = createSlice({
 			state.tagTextAdded = action.payload
 		},
 		addTag: (state, action) => {
-			state.tagSection[0].tags.push(action.payload)
+			const { sectionName, newTag } = action.payload
+			const section = state.tagSection.find(
+				(section) => section.sectionName === sectionName
+			)
+			if (section) {
+				section.tags.push(newTag)
+			}
 		},
 		addSection: (state, action) => {
 			state.tagSection.push(action.payload)
