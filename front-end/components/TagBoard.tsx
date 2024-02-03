@@ -1,14 +1,24 @@
 import { Button } from "@/components/ui/button"
 import TagSection from './TagSection';
 import TagTextAddedArea from './TagTextAddedArea';
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector, useAppDispatch } from "@/redux/hooks";
+import { addSection } from "@/redux/features/tagSlice";
 
 const TagBoard = () => {
 	const { tagSection } = useAppSelector((state) => state.tagReducer);
+	const dispatch = useAppDispatch();
+
+	const handleAddSectionClick = () => {
+		const newSection = {
+			sectionName: 'New Section',
+			tags: [],
+		};
+		dispatch(addSection(newSection));
+	};
 
 	return (
 		<div>
-			<Button className='mb-5 bg-yellow-400 text-black'>
+			<Button className='mb-5' onClick={handleAddSectionClick}>
 				Add new section
 			</Button>
 

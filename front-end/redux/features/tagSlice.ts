@@ -49,9 +49,12 @@ const tagSlice = createSlice({
 		addTag: (state, action) => {
 			state.tagSection[0].tags.push(action.payload)
 		},
+		addSection: (state, action) => {
+			state.tagSection.push(action.payload)
+		},
 	},
 })
 
-export const { addTagText } = tagSlice.actions
+export const { addTagText, addTag, addSection } = tagSlice.actions
 
 export default tagSlice.reducer
