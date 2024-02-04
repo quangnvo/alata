@@ -100,19 +100,21 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
     return (
         <div className='p-4 border border-gray-300 rounded-md mb-8'>
 
-            <p className='font-bold mb-4 text-2xl'>
-                {section.sectionName}
+            <div className='font-bold mb-4 text-2xl flex justify-between items-center'>
+                <p>
+                    {section.sectionName}
+                </p>
 
                 {/* Delete section button */}
                 {isDeleteSectionMode && (
                     <button
-                        className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs ml-1 mr-5 border-2 border-black "
+                        className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs border-2 border-black "
                         onClick={() => dispatch(deleteSection(section.sectionName))}
                     >
                         X
                     </button>
                 )}
-            </p>
+            </div>
 
             {/* Input field and Button to add tags */}
             <div className="flex mb-4">
