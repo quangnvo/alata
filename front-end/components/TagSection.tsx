@@ -4,6 +4,15 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { addTagText, addTag, deleteTag, deleteSection } from "@/redux/features/tagSlice";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogFooter,
+    DialogClose,
+} from "@/components/ui/dialog"
 
 type TagSectionProps = {
     section: {
@@ -65,8 +74,6 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
         dispatch(addTagText(tags.join(', ')));
     };
 
-
-
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setAddTagValue(event.target.value);
     };
@@ -83,7 +90,6 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                     {tag}
                 </Button>
 
-
                 {isDeleteMode && (
                     <button
                         className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs ml-1 mr-5 border-2 border-black "
@@ -92,7 +98,6 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                         X
                     </button>
                 )}
-
             </div>
         ));
     };
@@ -106,37 +111,70 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                 </p>
 
                 {/* Delete section button */}
-                {isDeleteSectionMode && (
+                {/* {isDeleteSectionMode && (
                     <button
                         className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs border-2 border-black "
                         onClick={() => dispatch(deleteSection(section.sectionName))}
                     >
                         X
                     </button>
+                )} */}
+
+                {isDeleteSectionMode && (
+                    <Dialog key={section.sectionName}>
+                        <DialogTrigger asChild className='mb-5'>
+                            <button className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs border-2 border-black">
+                                X
+                            </button>
+                        </DialogTrigger>
+
+                        <DialogContent className="sm:max-w-[425px]">
+                            <div>
+                                Are you sure to delete <span className='font-bold'>{section.sectionName}</span> section?
+                            </div>
+
+                            <DialogFooter>
+                                <DialogClose asChild>
+                                    <Button
+                                        type="button"
+                                        variant="outline"
+                                    >
+                                        No
+                                    </Button>
+                                </DialogClose>
+                                <Button
+                                    variant="outline"
+                                    onClick={() => dispatch(deleteSection(section.sectionName))}
+                                >
+                                    Yes
+                                </Button>
+                            </DialogFooter>
+                        </DialogContent>
+                    </Dialog>
                 )}
+
             </div>
 
             {/* Input field and Button to add tags */}
-            <div className="flex mb-4">
+            <div className="flex gap-3 mb-4">
                 <input
                     type="text"
                     value={addTagValue}
                     onChange={handleInputChange}
                     disabled={isDeleteSectionMode}
-                    className="border rounded px-2 py-1 mr-2"
+                    className="border rounded px-2 py-1"
                 />
+
+                {/* Button Add new tag */}
                 <Button
                     onClick={handleAddTagClick}
                     disabled={isDeleteSectionMode}
                 >
                     Add new tag
                 </Button>
-            </div>
 
-            <div>
                 {/* Button Delete tag */}
                 <Button
-                    className='mb-2'
                     onClick={handleDeleteClick}
                     variant={isDeleteMode ? 'default' : 'destructive'}
                     disabled={isDeleteSectionMode}
@@ -144,7 +182,6 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                     {isDeleteMode ? 'Done' : 'Delete tag'}
                 </Button>
             </div>
-
 
             {/* Tags */}
             <div>

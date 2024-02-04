@@ -20,7 +20,6 @@ import {
 const TagBoard = () => {
 	const { tagSection } = useAppSelector((state) => state.tagReducer);
 	const dispatch = useAppDispatch();
-
 	const [newSectionName, setNewSectionName] = useState('');
 	const [isDeleteSectionMode, setIsDeleteSectionMode] = useState(false);
 
@@ -39,7 +38,9 @@ const TagBoard = () => {
 				{/* Button Add Section */}
 				<Dialog>
 					<DialogTrigger asChild className='mb-5'>
-						<Button>
+						<Button
+							disabled={isDeleteSectionMode}
+						>
 							Add new section
 						</Button>
 					</DialogTrigger>
@@ -62,7 +63,13 @@ const TagBoard = () => {
 						</div>
 
 						<DialogFooter>
-							<Button type="submit" onClick={handleFormSubmit}>Save</Button>
+							<Button
+								type="submit"
+								// onClick={handleFormSubmit}
+								onClick={handleFormSubmit}
+							>
+								Add
+							</Button>
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
