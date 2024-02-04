@@ -201,4 +201,3 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 }
 
 export default TagSection;
-

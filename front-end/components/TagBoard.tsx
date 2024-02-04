@@ -25,6 +25,9 @@ const TagBoard = () => {
 
 	const handleFormSubmit = (event: any) => {
 		event.preventDefault();
+		if (newSectionName.trim() === '') {
+			return;
+		}
 		const newSection = {
 			sectionName: newSectionName,
 			tags: [],  // Initialize tags as an empty array
@@ -36,6 +39,17 @@ const TagBoard = () => {
 
 	return (
 		<div>
+			<div className='mb-5'>
+				<p className='font-bold text-lg mb-2'>Viec can lam</p>
+				<ul className='list-disc list-inside space-y-2'>
+					<li className='text-blue-600'>Button - Delete all tags</li>
+					<li className='text-blue-600'>Button - Bookmark</li>
+					<li className='text-blue-600'>Button - Change section name</li>
+					<li className='text-blue-600'>Fix bug - Cố định text area</li>
+				</ul>
+			</div>
+
+
 			<div className='flex gap-2'>
 				{/* Button Add Section */}
 				<Dialog>
@@ -87,11 +101,16 @@ const TagBoard = () => {
 
 			<div className="grid grid-cols-12 gap-4">
 				{/* Tag sections */}
-				{tagSection.map((section, index) => (
-					<div key={index} className="col-span-9">
-						<TagSection section={section} isDeleteSectionMode={isDeleteSectionMode} />
-					</div>
-				))}
+				{tagSection.length != 0 ?
+
+					tagSection.map((section, index) => (
+						<div key={index} className="col-span-9">
+							<TagSection section={section} isDeleteSectionMode={isDeleteSectionMode} />
+						</div>
+					))
+
+					: <div className="col-span-9"></div>}
+
 
 				{/* Tag text added area */}
 				<div className="col-span-3">

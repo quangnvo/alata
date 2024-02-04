@@ -52,9 +52,15 @@ const tagSlice = createSlice({
 				(section) => section.sectionName === sectionName
 			)
 			if (section) {
-				section.tags.push(newTag)
+				// Check if the tag already exists in the section
+				const isTagExisted = section.tags.includes(newTag)
+				if (!isTagExisted) {
+					// If the tag doesn't exist, add it
+					section.tags.push(newTag)
+				}
 			}
 		},
+
 		deleteTag: (state, action) => {
 			const { sectionName, tagToDelete } = action.payload
 			const section = state.tagSection.find(
