@@ -22,6 +22,7 @@ const TagBoard = () => {
 	const dispatch = useAppDispatch();
 
 	const [newSectionName, setNewSectionName] = useState('');
+	const [isDeleteSectionMode, setIsDeleteSectionMode] = useState(false);
 
 	const handleFormSubmit = () => {
 		const newSection = {
@@ -67,16 +68,20 @@ const TagBoard = () => {
 				</Dialog>
 
 				{/* Button Delete Section */}
-				<Button variant="destructive">
-					Delete section
+				<Button
+					variant={isDeleteSectionMode ? "default" : "destructive"}
+					onClick={() => setIsDeleteSectionMode(!isDeleteSectionMode)}
+				>
+					{isDeleteSectionMode ? 'Cancel delete' : 'Delete section'}
 				</Button>
+
 			</div>
 
 			<div className="grid grid-cols-12 gap-4">
 				{/* Tag sections */}
 				{tagSection.map((section, index) => (
 					<div key={index} className="col-span-9">
-						<TagSection section={section} />
+						<TagSection section={section} isDeleteSectionMode={isDeleteSectionMode} />
 					</div>
 				))}
 
