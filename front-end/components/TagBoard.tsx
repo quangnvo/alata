@@ -34,45 +34,53 @@ const TagBoard = () => {
 
 	return (
 		<div>
-			<Dialog>
-				<DialogTrigger asChild className='mb-5'>
-					<Button>
-						Add new section
-					</Button>
-				</DialogTrigger>
-
-				<DialogContent className="sm:max-w-[425px]">
-					<DialogHeader>
-						<DialogTitle>
+			<div className='flex gap-2'>
+				{/* Button Add Section */}
+				<Dialog>
+					<DialogTrigger asChild className='mb-5'>
+						<Button>
 							Add new section
-						</DialogTitle>
-					</DialogHeader>
-					<div className="grid gap-4 py-4">
-						<label>
-							<Input
-								type="text"
-								value={newSectionName}
-								onChange={e => setNewSectionName(e.target.value)}
-								placeholder="Section name"
-							/>
-						</label>
-					</div>
+						</Button>
+					</DialogTrigger>
 
-					<DialogFooter>
-						<Button variant="outline">Cancel</Button>
-						<Button type="submit" onClick={handleFormSubmit}>Save</Button>
-					</DialogFooter>
-				</DialogContent>
-			</Dialog>
+					<DialogContent className="sm:max-w-[425px]">
+						<DialogHeader>
+							<DialogTitle>
+								Add new section
+							</DialogTitle>
+						</DialogHeader>
+						<div className="grid gap-4 py-4">
+							<label>
+								<Input
+									type="text"
+									value={newSectionName}
+									onChange={e => setNewSectionName(e.target.value)}
+									placeholder="Section name"
+								/>
+							</label>
+						</div>
 
+						<DialogFooter>
+							<Button type="submit" onClick={handleFormSubmit}>Save</Button>
+						</DialogFooter>
+					</DialogContent>
+				</Dialog>
+
+				{/* Button Delete Section */}
+				<Button variant="destructive">
+					Delete section
+				</Button>
+			</div>
 
 			<div className="grid grid-cols-12 gap-4">
+				{/* Tag sections */}
 				{tagSection.map((section, index) => (
 					<div key={index} className="col-span-9">
 						<TagSection section={section} />
 					</div>
 				))}
 
+				{/* Tag text added area */}
 				<div className="col-span-3">
 					<TagTextAddedArea />
 				</div>

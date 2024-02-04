@@ -55,9 +55,6 @@ const tagSlice = createSlice({
 				section.tags.push(newTag)
 			}
 		},
-		addSection: (state, action) => {
-			state.tagSection.push(action.payload)
-		},
 		deleteTag: (state, action) => {
 			const { sectionName, tagToDelete } = action.payload
 			const section = state.tagSection.find(
@@ -66,6 +63,9 @@ const tagSlice = createSlice({
 			if (section) {
 				section.tags = section.tags.filter((tag) => tag !== tagToDelete)
 			}
+		},
+		addSection: (state, action) => {
+			state.tagSection.push(action.payload)
 		},
 	},
 })
