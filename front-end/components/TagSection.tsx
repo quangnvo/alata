@@ -111,15 +111,6 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                 </p>
 
                 {/* Delete section button */}
-                {/* {isDeleteSectionMode && (
-                    <button
-                        className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs border-2 border-black "
-                        onClick={() => dispatch(deleteSection(section.sectionName))}
-                    >
-                        X
-                    </button>
-                )} */}
-
                 {isDeleteSectionMode && (
                     <Dialog key={section.sectionName}>
                         <DialogTrigger asChild className='mb-5'>
@@ -155,23 +146,25 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
             </div>
 
-            {/* Input field and Button to add tags */}
-            <div className="flex gap-3 mb-4">
-                <input
-                    type="text"
-                    value={addTagValue}
-                    onChange={handleInputChange}
-                    disabled={isDeleteSectionMode || isDeleteMode}
-                    className="border rounded px-2 py-1"
-                />
+            <div className='flex gap-3'>
+                {/* Input field and Button to add tags */}
+                <form onSubmit={(e) => { e.preventDefault(); handleAddTagClick(); }} className="flex gap-3 mb-4">
+                    <input
+                        type="text"
+                        value={addTagValue}
+                        onChange={handleInputChange}
+                        disabled={isDeleteSectionMode || isDeleteMode}
+                        className="border rounded px-2 py-1"
+                    />
 
-                {/* Button Add new tag */}
-                <Button
-                    onClick={handleAddTagClick}
-                    disabled={isDeleteSectionMode || isDeleteMode}
-                >
-                    Add new tag
-                </Button>
+                    {/* Button Add new tag */}
+                    <Button
+                        type="submit"
+                        disabled={isDeleteSectionMode || isDeleteMode}
+                    >
+                        Add new tag
+                    </Button>
+                </form>
 
                 {/* Button Delete tag */}
                 <Button
