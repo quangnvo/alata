@@ -23,7 +23,8 @@ const TagBoard = () => {
 	const [newSectionName, setNewSectionName] = useState('');
 	const [isDeleteSectionMode, setIsDeleteSectionMode] = useState(false);
 
-	const handleFormSubmit = () => {
+	const handleFormSubmit = (event: any) => {
+		event.preventDefault();
 		const newSection = {
 			sectionName: newSectionName,
 			tags: [],  // Initialize tags as an empty array
@@ -31,6 +32,7 @@ const TagBoard = () => {
 		dispatch(addSection(newSection));
 		setNewSectionName('');
 	};
+
 
 	return (
 		<div>
@@ -51,7 +53,7 @@ const TagBoard = () => {
 								Add new section
 							</DialogTitle>
 						</DialogHeader>
-						<div className="grid gap-4 py-4">
+						<form onSubmit={handleFormSubmit} className="grid gap-4 py-4">
 							<label>
 								<Input
 									type="text"
@@ -60,19 +62,18 @@ const TagBoard = () => {
 									placeholder="Section name"
 								/>
 							</label>
-						</div>
 
-						<DialogFooter>
-							<Button
-								type="submit"
-								// onClick={handleFormSubmit}
-								onClick={handleFormSubmit}
-							>
-								Add
-							</Button>
-						</DialogFooter>
+							<DialogFooter>
+								<Button
+									type="submit"
+								>
+									Add
+								</Button>
+							</DialogFooter>
+						</form>
 					</DialogContent>
 				</Dialog>
+
 
 				{/* Button Delete Section */}
 				<Button
