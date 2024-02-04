@@ -127,18 +127,34 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                             <DialogFooter>
                                 <DialogClose asChild>
                                     <Button
+                                        variant="outline"
+                                        onClick={() => dispatch(deleteSection(section.sectionName))}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'ArrowRight') {
+                                                // Focus on the next button
+                                                (e.currentTarget.nextSibling as HTMLElement)?.focus();
+                                            }
+                                        }}
+                                    >
+                                        Yes
+                                    </Button>
+                                </DialogClose>
+
+                                <DialogClose asChild>
+                                    <Button
                                         type="button"
                                         variant="outline"
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'ArrowLeft') {
+                                                // Focus on the previous button
+                                                (e.currentTarget.previousSibling as HTMLElement)?.focus();
+                                            }
+                                        }}
                                     >
                                         No
                                     </Button>
                                 </DialogClose>
-                                <Button
-                                    variant="outline"
-                                    onClick={() => dispatch(deleteSection(section.sectionName))}
-                                >
-                                    Yes
-                                </Button>
+
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>
