@@ -58,9 +58,18 @@ const tagSlice = createSlice({
 		addSection: (state, action) => {
 			state.tagSection.push(action.payload)
 		},
+		deleteTag: (state, action) => {
+			const { sectionName, tagToDelete } = action.payload
+			const section = state.tagSection.find(
+				(section) => section.sectionName === sectionName
+			)
+			if (section) {
+				section.tags = section.tags.filter((tag) => tag !== tagToDelete)
+			}
+		},
 	},
 })
 
-export const { addTagText, addTag, addSection } = tagSlice.actions
+export const { addTagText, addTag, addSection, deleteTag } = tagSlice.actions
 
 export default tagSlice.reducer
