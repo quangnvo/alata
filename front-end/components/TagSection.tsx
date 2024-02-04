@@ -161,14 +161,14 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
                     type="text"
                     value={addTagValue}
                     onChange={handleInputChange}
-                    disabled={isDeleteSectionMode}
+                    disabled={isDeleteSectionMode || isDeleteMode}
                     className="border rounded px-2 py-1"
                 />
 
                 {/* Button Add new tag */}
                 <Button
                     onClick={handleAddTagClick}
-                    disabled={isDeleteSectionMode}
+                    disabled={isDeleteSectionMode || isDeleteMode}
                 >
                     Add new tag
                 </Button>
