@@ -111,6 +111,16 @@ const tagSlice = createSlice({
 				state.tagTextAdded = updatedTags.join(', ')
 			}
 		},
+
+		changeSectionName: (state, action) => {
+			const { oldSectionName, newSectionName } = action.payload
+			const section = state.tagSection.find(
+				(section) => section.sectionName === oldSectionName
+			)
+			if (section) {
+				section.sectionName = newSectionName
+			}
+		},
 	},
 })
 
@@ -121,6 +131,7 @@ export const {
 	deleteAllTags,
 	addSection,
 	deleteSection,
+	changeSectionName,
 } = tagSlice.actions
 
 export default tagSlice.reducer

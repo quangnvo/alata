@@ -3,19 +3,17 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { addTagText, addTag, deleteTag, deleteAllTags, deleteSection } from "@/redux/features/tagSlice";
+import { addTagText, addTag, deleteTag, deleteAllTags, deleteSection, changeSectionName } from "@/redux/features/tagSlice";
 import {
 	Dialog,
 	DialogContent,
-	DialogHeader,
-	DialogTitle,
 	DialogTrigger,
 	DialogFooter,
 	DialogClose,
-	DialogDescription,
+	DialogHeader,
 } from "@/components/ui/dialog"
 import { Input } from './ui/input';
-import { Label } from './ui/label';
+
 
 type TagSectionProps = {
 	section: {
@@ -33,6 +31,8 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
 	const [isDeleteMode, setIsDeleteMode] = useState<boolean>(false);
 	const [addTagValue, setAddTagValue] = useState<string>('');
+	const [newSectionName, setNewSectionName] = useState('');
+
 
 	const handleAddTagClick = () => {
 		if (addTagValue) {
@@ -59,7 +59,6 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 		setIsDeleteMode(prevDeleteMode => !prevDeleteMode);
 	};
 
-
 	const handleTagDelete = (tagToDelete: string) => {
 		// Remove the tag from the section
 		dispatch(deleteTag({
@@ -79,6 +78,19 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setAddTagValue(event.target.value);
+	};
+
+	// Add an event handler for the input change
+	const handleSectionNameChange = (event: any) => {
+		event.preventDefault();
+		if (newSectionName.trim() === '') {
+			return;
+		}
+		dispatch(changeSectionName({
+			oldSectionName: section.sectionName,
+			newSectionName: newSectionName
+		}));
+		setNewSectionName('');
 	};
 
 	const renderTags = () => {
@@ -113,18 +125,53 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 					<p>
 						{section.sectionName}
 					</p>
-					<Button
-						variant="outline"
-						disabled={isDeleteSectionMode}
-					>
-						Change section name
-					</Button>
+
+					{/* Button Change section name aaaaaaaaaaaaa*/}
+					<Dialog key={section.sectionName}>
+						<DialogTrigger asChild>
+							<Button
+								disabled={isDeleteSectionMode}
+								variant="secondary"
+							>
+								Change section name
+							</Button>
+						</DialogTrigger>
+
+						<DialogContent className="sm:max-w-[425px]">
+							<DialogHeader>
+								Change section name
+							</DialogHeader>
+
+
+							<form
+								onSubmit={handleSectionNameChange}
+								className="grid gap-4 py-4"
+							>
+								<label>
+									<Input
+										type="text"
+										value={newSectionName}
+										onChange={e => setNewSectionName(e.target.value)}
+										placeholder="New section name"
+									/>
+								</label>
+
+								<DialogFooter>
+									<Button
+										type="submit"
+									>
+										Change
+									</Button>
+								</DialogFooter>
+							</form>
+						</DialogContent>
+					</Dialog>
 				</div>
 
 				{/* Delete section button X (invisible, only can be seen by clicking the button Delete Section) */}
 				{isDeleteSectionMode && (
 					<Dialog key={section.sectionName}>
-						<DialogTrigger asChild className='mb-5'>
+						<DialogTrigger asChild>
 							<button className="bg-red-400 hover:bg-red-500 text-white font-semibold py-1 px-2 rounded-full text-xs border-2 border-black">
 								X
 							</button>
@@ -204,7 +251,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
 				{/* Button Delete all tags */}
 				<Dialog key={section.sectionName}>
-					<DialogTrigger asChild className='mb-5'>
+					<DialogTrigger asChild>
 						<Button
 							disabled={isDeleteSectionMode}
 							variant="destructive"
