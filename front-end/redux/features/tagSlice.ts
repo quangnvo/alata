@@ -37,6 +37,16 @@ const initialState = {
 		},
 	],
 	tagTextAdded: '',
+	bookmarks: [
+		{
+			bookmarkName: 'Bookmark 1',
+			tags: ['tag1', 'tag2', 'tag3'],
+		},
+		{
+			bookmarkName: 'Bookmark 2',
+			tags: ['tag4', 'tag5', 'tag6'],
+		},
+	],
 }
 
 const tagSlice = createSlice({
@@ -119,6 +129,26 @@ const tagSlice = createSlice({
 			)
 			if (section) {
 				section.sectionName = newSectionName
+			}
+		},
+
+		addBookmark: (state, action) => {
+			state.bookmarks.push(action.payload)
+		},
+
+		deleteBookmark: (state, action) => {
+			state.bookmarks = state.bookmarks.filter(
+				(bookmark) => bookmark.bookmarkName !== action.payload
+			)
+		},
+
+		updateBookmark: (state, action) => {
+			const { name, newTags } = action.payload
+			const bookmark = state.bookmarks.find(
+				(bookmark) => bookmark.bookmarkName === name
+			)
+			if (bookmark) {
+				bookmark.tags = newTags
 			}
 		},
 	},

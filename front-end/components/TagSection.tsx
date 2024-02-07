@@ -11,6 +11,7 @@ import {
 	DialogFooter,
 	DialogClose,
 	DialogHeader,
+	DialogTitle,
 } from "@/components/ui/dialog"
 import { Input } from './ui/input';
 
@@ -139,7 +140,9 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
 						<DialogContent className="sm:max-w-[425px]">
 							<DialogHeader>
-								Change section name
+								<DialogTitle>
+									Change section name
+								</DialogTitle>
 							</DialogHeader>
 
 

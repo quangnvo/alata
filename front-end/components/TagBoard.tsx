@@ -42,75 +42,83 @@ const TagBoard = () => {
 			<div className='mb-5'>
 				<p className='font-bold text-lg mb-2'>Viec can lam</p>
 				<ul className='list-disc list-inside space-y-2'>
-					<li className='text-blue-600'>Button - Delete all tags</li>
-					<li className='text-blue-600'>Button - Bookmark</li>
-					<li className='text-blue-600'>Button - Change section name</li>
+					<li className='text-blue-600'>Button - Add bookmark</li>
+					<li className='text-blue-600'>Button - Delete bookmark</li>
+					<li className='text-blue-600'>Button - Update bookmark</li>
 					<li className='text-blue-600'>Fix bug - Cố định text area</li>
 				</ul>
 			</div>
 
 
-			<div className='flex gap-2'>
-				{/* Button Add Section */}
-				<Dialog>
-					<DialogTrigger asChild className='mb-5'>
-						<Button
-							disabled={isDeleteSectionMode}
-						>
-							Add new section
-						</Button>
-					</DialogTrigger>
 
-					<DialogContent className="sm:max-w-[425px]">
-						<DialogHeader>
-							<DialogTitle>
-								Add new section
-							</DialogTitle>
-						</DialogHeader>
-						<form onSubmit={handleFormSubmit} className="grid gap-4 py-4">
-							<label>
-								<Input
-									type="text"
-									value={newSectionName}
-									onChange={e => setNewSectionName(e.target.value)}
-									placeholder="Section name"
-								/>
-							</label>
-
-							<DialogFooter>
-								<Button
-									type="submit"
-								>
-									Add
-								</Button>
-							</DialogFooter>
-						</form>
-					</DialogContent>
-				</Dialog>
-
-
-				{/* Button Delete Section */}
-				<Button
-					variant={isDeleteSectionMode ? "default" : "destructive"}
-					onClick={() => setIsDeleteSectionMode(!isDeleteSectionMode)}
-				>
-					{isDeleteSectionMode ? 'Cancel delete' : 'Delete section'}
-				</Button>
-
-			</div>
 
 			<div className="grid grid-cols-12 gap-4">
 				{/* Tag sections */}
-				{tagSection.length != 0 ?
+				<div className='col-span-6'>
 
-					tagSection.map((section, index) => (
-						<div key={index} className="col-span-9">
-							<TagSection section={section} isDeleteSectionMode={isDeleteSectionMode} />
-						</div>
-					))
+					<div className='flex gap-2'>
+						{/* Button Add new section */}
+						<Dialog>
+							<DialogTrigger asChild className='mb-5'>
+								<Button
+									disabled={isDeleteSectionMode}
+								>
+									Add new section
+								</Button>
+							</DialogTrigger>
 
-					: <div className="col-span-9"></div>}
+							<DialogContent className="sm:max-w-[425px]">
+								<DialogHeader>
+									<DialogTitle>
+										Add new section
+									</DialogTitle>
+								</DialogHeader>
+								<form onSubmit={handleFormSubmit} className="grid gap-4 py-4">
+									<label>
+										<Input
+											type="text"
+											value={newSectionName}
+											onChange={e => setNewSectionName(e.target.value)}
+											placeholder="Section name"
+										/>
+									</label>
 
+									<DialogFooter>
+										<Button
+											type="submit"
+										>
+											Add
+										</Button>
+									</DialogFooter>
+								</form>
+							</DialogContent>
+						</Dialog>
+
+
+						{/* Button Delete Section */}
+						<Button
+							variant={isDeleteSectionMode ? "default" : "destructive"}
+							onClick={() => setIsDeleteSectionMode(!isDeleteSectionMode)}
+						>
+							{isDeleteSectionMode ? 'Cancel delete' : 'Delete section'}
+						</Button>
+
+					</div>
+
+					{/* Render tag sections */}
+					{tagSection.length != 0 ?
+						tagSection.map((section, index) => (
+							<div key={index}>
+								<TagSection section={section} isDeleteSectionMode={isDeleteSectionMode} />
+							</div>
+						))
+						: null}
+				</div>
+
+				{/* Bookmarks */}
+				<div className='col-span-3'>
+					aaaaaaa
+				</div>
 
 				{/* Tag text added area */}
 				<div className="col-span-3">
