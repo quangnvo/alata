@@ -46,6 +46,7 @@ const tagSlice = createSlice({
 		addTagText: (state, action) => {
 			state.tagTextAdded = action.payload
 		},
+
 		addTag: (state, action) => {
 			const { sectionName, newTag } = action.payload
 			const section = state.tagSection.find(
@@ -70,9 +71,22 @@ const tagSlice = createSlice({
 				section.tags = section.tags.filter((tag) => tag !== tagToDelete)
 			}
 		},
+
+		deleteAllTags: (state, action) => {
+			const section = state.tagSection.find(
+				(section) => section.sectionName === action.payload
+			)
+			console.log(section)
+			if (section) {
+				section.tags = []
+				console.log('section.tags', section.tags)
+			}
+		},
+
 		addSection: (state, action) => {
 			state.tagSection.push(action.payload)
 		},
+
 		deleteSection: (state, action) => {
 			// Find the section to delete
 			const sectionToDelete = state.tagSection.find(
@@ -100,7 +114,13 @@ const tagSlice = createSlice({
 	},
 })
 
-export const { addTagText, addTag, deleteTag, addSection, deleteSection } =
-	tagSlice.actions
+export const {
+	addTagText,
+	addTag,
+	deleteTag,
+	deleteAllTags,
+	addSection,
+	deleteSection,
+} = tagSlice.actions
 
 export default tagSlice.reducer

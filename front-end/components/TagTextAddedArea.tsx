@@ -22,13 +22,23 @@ const TagTextAddedArea = () => {
                 </span>
             </p>
 
-            <Button onClick={handleCopyToClipboard}>
-                Copy text
-            </Button>
+
 
             <p>
                 {tagTextAdded}
             </p>
+
+            <div className='flex gap-2'>
+                <Button variant="secondary">
+                    Bookmark 🔖
+                </Button>
+
+                <Button onClick={handleCopyToClipboard}>
+                    Copy text
+                </Button>
+            </div>
+
+
         </div>
     )
 }
