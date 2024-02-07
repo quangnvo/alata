@@ -59,15 +59,16 @@ const tagSlice = createSlice({
 
 		addTag: (state, action) => {
 			const { sectionName, newTag } = action.payload
+			const trimmedTag = newTag.trim()
 			const section = state.tagSection.find(
 				(section) => section.sectionName === sectionName
 			)
 			if (section) {
 				// Check if the tag already exists in the section
-				const isTagExisted = section.tags.includes(newTag)
+				const isTagExisted = section.tags.includes(trimmedTag)
 				if (!isTagExisted) {
 					// If the tag doesn't exist, add it
-					section.tags.push(newTag)
+					section.tags.push(trimmedTag)
 				}
 			}
 		},

@@ -46,6 +46,8 @@ const TagBoard = () => {
 					<li className='text-blue-600'>Button - Delete bookmark</li>
 					<li className='text-blue-600'>Button - Update bookmark</li>
 					<li className='text-blue-600'>Fix bug - Cố định text area</li>
+					<li className='text-blue-600'>Fix bug - Add tag bị lỗi "1" và "  1" bị hiểu là khác nhau</li>
+					<li className='text-blue-600'>Fix bug - Cố định text area</li>
 				</ul>
 			</div>
 
