@@ -127,7 +127,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 						{section.sectionName}
 					</p>
 
-					{/* Button Change section name aaaaaaaaaaaaa*/}
+					{/* Button Change section name */}
 					<Dialog key={section.sectionName}>
 						<DialogTrigger asChild>
 							<Button

@@ -163,6 +163,9 @@ export const {
 	addSection,
 	deleteSection,
 	changeSectionName,
+	addBookmark,
+	deleteBookmark,
+	updateBookmark,
 } = tagSlice.actions
 
 export default tagSlice.reducer
