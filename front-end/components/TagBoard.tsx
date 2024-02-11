@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button"
 import TagSection from './TagSection';
 import TagTextAddedArea from './TagTextAddedArea';
+import Bookmarks from './Bookmarks';
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { Input } from "@/components/ui/input"
 import { addSection } from "@/redux/features/tagSlice";
@@ -119,7 +120,7 @@ const TagBoard = () => {
 
 				{/* Bookmarks */}
 				<div className='col-span-3'>
-					aaaaaaa
+					<Bookmarks />
 				</div>
 
 				{/* Tag text added area */}

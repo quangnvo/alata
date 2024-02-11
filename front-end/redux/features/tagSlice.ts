@@ -134,6 +134,7 @@ const tagSlice = createSlice({
 		},
 
 		addBookmark: (state, action) => {
+			console.log('đã vào add bookmark', action.payload)
 			state.bookmarks.push(action.payload)
 		},
 
