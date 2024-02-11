@@ -8,6 +8,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
+import { Button } from './ui/button';
+
+const handleCopyToClipboard = (tags: string[]) => {
+    const tagsText = tags.join(', ');
+    navigator.clipboard.writeText(tagsText);
+};
 
 const BookmarkCard = ({ bookmark }: any) => (
     <Card
@@ -24,6 +30,13 @@ const BookmarkCard = ({ bookmark }: any) => (
                 ))}
             </ul>
         </CardContent>
+        <CardFooter>
+            <Button
+                variant="secondary"
+                onClick={() => handleCopyToClipboard(bookmark.tags)}>
+                Copy text
+            </Button>
+        </CardFooter>
     </Card>
 );
 
