@@ -30,11 +30,26 @@ const BookmarkCard = ({ bookmark }: any) => (
                 ))}
             </ul>
         </CardContent>
-        <CardFooter>
+        <CardFooter className='flex gap-2'>
+            {/* Button Copy text in Bookmark */}
             <Button
                 variant="secondary"
                 onClick={() => handleCopyToClipboard(bookmark.tags)}>
                 Copy text
+            </Button>
+
+            {/* Button Delete Bookmark */}
+            <Button
+                variant="destructive"
+                onClick={() => console.log('delete')}>
+                Delete
+            </Button>
+
+            {/* Button Update Bookmark */}
+            <Button
+                variant="secondary"
+                onClick={() => console.log('update')}>
+                Update
             </Button>
         </CardFooter>
     </Card>
