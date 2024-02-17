@@ -57,17 +57,24 @@ const tagSlice = createSlice({
 			state.tagTextAdded = action.payload
 		},
 
+		clearAllTagText: (state) => {
+			state.tagTextAdded = ''
+		},
+
 		addTag: (state, action) => {
 			const { sectionName, newTag } = action.payload
+			// Trim the tag that the user added from the input
 			const trimmedTag = newTag.trim()
+			// Find the section that the user wants to add the tag to
 			const section = state.tagSection.find(
 				(section) => section.sectionName === sectionName
 			)
+			// If the section exists
 			if (section) {
 				// Check if the tag already exists in the section
 				const isTagExisted = section.tags.includes(trimmedTag)
+				// If the tag doesn't exist, add it
 				if (!isTagExisted) {
-					// If the tag doesn't exist, add it
 					section.tags.push(trimmedTag)
 				}
 			}
@@ -158,6 +165,7 @@ const tagSlice = createSlice({
 
 export const {
 	addTagText,
+	clearAllTagText,
 	addTag,
 	deleteTag,
 	deleteAllTags,

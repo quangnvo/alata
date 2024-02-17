@@ -34,32 +34,53 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 	const [addTagValue, setAddTagValue] = useState<string>('');
 	const [newSectionName, setNewSectionName] = useState('');
 
-
+	// ********************
+	// * This function is used for "Add new tag" button 
+	// ********************
 	const handleAddTagClick = () => {
 		if (addTagValue) {
-			dispatch(addTag({ sectionName: section.sectionName, newTag: addTagValue }));
+			dispatch(addTag({
+				sectionName: section.sectionName,
+				newTag: addTagValue
+			}));
 			setAddTagValue('');
 		}
 	};
 
+	// ********************
+	// * This function is used when user click on a tag, then add the tag to the tagTextAdded
+	// ********************
 	const handleTagClick = (tag: string) => {
 		// Split the string into an array of tags
-		let tags = tagTextAdded ? tagTextAdded.split(',').map(t => t.trim()) : [];
+		// Initialize tags as an empty array
+		let tags: any[] = [];
+		// Check if tagTextAdded exists
+		if (tagTextAdded) {
+			// If it does, split the string into an array of tags and trim each tag
+			tags = tagTextAdded.split(',').map(tag => tag.trim());
+		}
+
+		// If the tag is already present, remove it
+		// If the tag is not present, add it
 		if (tags.includes(tag)) {
-			// If the tag is already present, remove it
 			tags = tags.filter(t => t !== tag);
 		} else {
-			// If the tag is not present, add it
 			tags.push(tag);
 		}
 		// Join the array back into a string and update the Redux state
 		dispatch(addTagText(tags.join(', ')));
 	};
 
+	// ********************
+	// * This function is used for "Delete tag" button
+	// ********************
 	const handleDeleteClick = () => {
 		setIsDeleteMode(prevDeleteMode => !prevDeleteMode);
 	};
 
+	// ********************
+	// * This function is used for "X" button of each tag, for deleting the each tag
+	// ********************
 	const handleTagDelete = (tagToDelete: string) => {
 		// Remove the tag from the section
 		dispatch(deleteTag({
@@ -77,11 +98,16 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 		dispatch(addTagText(tags.join(', ')));
 	};
 
+	// ********************
+	// * This function is used when user type in the input field for adding new tag
+	// ********************
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setAddTagValue(event.target.value);
 	};
 
-	// Add an event handler for the input change
+	// ********************
+	// * This function is used for changing the section name
+	// ********************
 	const handleSectionNameChange = (event: any) => {
 		event.preventDefault();
 		if (newSectionName.trim() === '') {
@@ -94,12 +120,16 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 		setNewSectionName('');
 	};
 
+	// ********************
+	// * This function is used for rendering the tags
+	// ********************
 	const renderTags = () => {
 		return section.tags.map((tag) => (
 			<div key={tag} className="inline-block p-1" >
 
 				<Button
 					onClick={() => handleTagClick(tag)}
+					// If the tag (meaning the tag button, like "hiking", "camping", "beach", etc.) is present in the tagTextAdded string, use the "default" variant;otherwise use the "outline" variant
 					variant={`${tagTextAdded.split(',').map((t) => t.trim()).includes(tag) ? 'default' : 'outline'}`}
 					disabled={isDeleteMode || isDeleteSectionMode}
 				>
@@ -118,6 +148,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 		));
 	};
 
+	// Render UI 
 	return (
 		<div className='p-4 border border-gray-300 rounded-md mb-8'>
 
@@ -224,7 +255,13 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 			</div>
 
 			<div className='flex gap-3'>
-				<form onSubmit={(e) => { e.preventDefault(); handleAddTagClick(); }} className="flex gap-3 mb-4">
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						handleAddTagClick();
+					}}
+					className="flex gap-3 mb-4"
+				>
 					{/* Input Add new tag */}
 					<input
 						type="text"

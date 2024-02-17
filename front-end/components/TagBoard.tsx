@@ -43,6 +43,7 @@ const TagBoard = () => {
 			<div className='mb-5'>
 				<p className='font-bold text-lg mb-2'>Viec can lam</p>
 				<ul className='list-disc list-inside space-y-2'>
+					<li className='text-blue-600'>Button - Clear all</li>
 					<li className='text-blue-600'>Button - Add bookmark</li>
 					<li className='text-blue-600'>Button - Delete bookmark</li>
 					<li className='text-blue-600'>Button - Update bookmark</li>
