@@ -151,14 +151,19 @@ const tagSlice = createSlice({
 			)
 		},
 
-		updateBookmark: (state, action) => {
-			const { name, newTags } = action.payload
-			const bookmark = state.bookmarks.find(
-				(bookmark) => bookmark.bookmarkName === name
-			)
-			if (bookmark) {
-				bookmark.tags = newTags
-			}
+		addTagToBookmark: (state, action) => {
+			const { bookmarkName, tag } = action.payload
+
+			state.bookmarks = state.bookmarks.map((eachBookmark) => {
+				if (eachBookmark.bookmarkName === bookmarkName) {
+					// Check if the tag already exists
+					if (!eachBookmark.tags.includes(tag)) {
+						// If it doesn't exist, add it
+						eachBookmark.tags.push(tag)
+					}
+				}
+				return eachBookmark
+			})
 		},
 	},
 })
@@ -174,7 +179,7 @@ export const {
 	changeSectionName,
 	addBookmark,
 	deleteBookmark,
-	updateBookmark,
+	addTagToBookmark,
 } = tagSlice.actions
 
 export default tagSlice.reducer

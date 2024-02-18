@@ -200,6 +200,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 							</form>
 						</DialogContent>
 					</Dialog>
+					{/* End of Button Change Section Name */}
 				</div>
 
 				{/* Delete section button X (invisible, only can be seen by clicking the button Delete Section) */}
