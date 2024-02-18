@@ -10,7 +10,7 @@ const Bookmarks = () => {
 
 	// Render Bookmarks with BookmarkCard, in each BookmarkCard, there are 3 buttons: Copy text, Delete Bookmark, Update Bookmark
 	return (
-		<div>
+		<div className='h-[70vh] overflow-y-auto pr-3'>
 			{bookmarks.map((bookmark) => {
 				return <BookmarkCard bookmark={bookmark} />
 			})}

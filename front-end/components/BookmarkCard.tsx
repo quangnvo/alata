@@ -63,20 +63,21 @@ const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
 	};
 
 	return (
-		<Card
+		<div
 			key={bookmark.bookmarkName}
-			className="mb-4"
+			className='mb-5 pb-5 border-b border-gray-400'
 		>
-			<CardHeader>
-				<CardTitle>{bookmark.bookmarkName}</CardTitle>
-			</CardHeader>
+			<div className='font-semibold mb-3 text-lg'>
+				{bookmark.bookmarkName}
+			</div>
 
 			{/* In the bookmark card content, render will be like "tag1, tag2, tag3" */}
-			<CardContent>
+			<div className='mb-5'>
 				{bookmark.tags.join(', ')}
-			</CardContent>
+			</div>
 
-			<CardFooter className='flex gap-2'>
+
+			<div className='flex gap-2'>
 				{/* Button Copy text in Bookmark */}
 				<Button
 					variant="secondary"
@@ -185,8 +186,8 @@ const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
 				</Dialog>
 				{/* End of Button Update Bookmark */}
 
-			</CardFooter>
-		</Card>
+			</div>
+		</div>
 	)
 }
 

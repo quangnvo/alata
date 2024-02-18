@@ -150,7 +150,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
 	// Render UI 
 	return (
-		<div className='p-4 border border-gray-300 rounded-md mb-8'>
+		<div className='mb-10 pb-10 border-b border-gray-400'>
 
 			<div className='font-bold mb-4 text-2xl flex justify-between items-center'>
 				<div className='flex gap-3 items-center'>
