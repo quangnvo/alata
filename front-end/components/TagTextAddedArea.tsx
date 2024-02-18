@@ -19,6 +19,9 @@ import { Input } from "./ui/input";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { clearAllTagText } from "@/redux/features/tagSlice";
 
+// Import icons from lucide-react
+import { Trash, Copy } from 'lucide-react';
+
 
 const TagTextAddedArea = () => {
 
@@ -52,11 +55,20 @@ const TagTextAddedArea = () => {
 			</p>
 
 			<div className='flex gap-2'>
+				{/* Button Copy text */}
+				<Button
+					onClick={handleCopyToClipboard}
+					variant="alatagCopyText"
+				>
+					Copy text
+				</Button>
+
+
 				{/* Button Bookmark */}
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button
-							variant="secondary"
+							variant="alatagAdd"
 						>
 							Bookmark
 						</Button>
@@ -102,9 +114,9 @@ const TagTextAddedArea = () => {
 				<Dialog>
 					<DialogTrigger asChild>
 						<Button
-							variant="destructive"
+							variant="alatagDelete"
 						>
-							Clear all
+							<Trash size={16} />
 						</Button>
 					</DialogTrigger>
 
@@ -150,12 +162,8 @@ const TagTextAddedArea = () => {
 						</DialogFooter>
 					</DialogContent>
 				</Dialog>
+				{/* End of Clear all */}
 			</div>
-
-			{/* Button Copy text */}
-			<Button onClick={handleCopyToClipboard}>
-				Copy text
-			</Button>
 		</div>
 	)
 }

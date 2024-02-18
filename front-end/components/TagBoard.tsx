@@ -17,6 +17,9 @@ import {
 	DialogFooter,
 } from "@/components/ui/dialog"
 
+// Import icon from lucide-react
+import { Trash } from 'lucide-react';
+
 
 const TagBoard = () => {
 	const { tagSection } = useAppSelector((state) => state.tagReducer);
@@ -47,6 +50,7 @@ const TagBoard = () => {
 					<DialogTrigger asChild className='mb-5'>
 						<Button
 							disabled={isDeleteSectionMode}
+							variant="alatagAdd"
 						>
 							Add new section
 						</Button>
@@ -84,10 +88,10 @@ const TagBoard = () => {
 
 				{/* Button Delete Section */}
 				<Button
-					variant={isDeleteSectionMode ? "default" : "destructive"}
+					variant={isDeleteSectionMode ? "default" : "alatagDelete"}
 					onClick={() => setIsDeleteSectionMode(!isDeleteSectionMode)}
 				>
-					{isDeleteSectionMode ? 'Cancel delete' : 'Delete section'}
+					{isDeleteSectionMode ? 'Cancel delete' : <><Trash size={16} className='mr-1' /> section</>}
 				</Button>
 				{/* End of Button Delete section */}
 			</div>

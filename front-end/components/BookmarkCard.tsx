@@ -2,18 +2,12 @@
 
 import React from 'react';
 
-import { useAppSelector, useAppDispatch } from '@/redux/hooks';
+import { useAppDispatch } from '@/redux/hooks';
 import { useState } from 'react';
 
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from "@/components/ui/card"
+
 import {
 	Dialog,
 	DialogContent,
@@ -24,6 +18,9 @@ import {
 
 import { deleteBookmark, addTagToBookmark } from '@/redux/features/tagSlice';
 
+// Import icons from lucide-react
+import { Trash, Pencil } from 'lucide-react';
+
 
 type BookmarkCardProps = {
 	bookmark: {
@@ -31,7 +28,6 @@ type BookmarkCardProps = {
 		tags: string[];
 	};
 };
-
 
 
 const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
@@ -65,7 +61,7 @@ const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
 	return (
 		<div
 			key={bookmark.bookmarkName}
-			className='mb-5 pb-5 border-b border-gray-400'
+			className='mb-14 pb-5 border-b border-gray-400'
 		>
 			<div className='font-semibold mb-3 text-lg'>
 				{bookmark.bookmarkName}
@@ -80,19 +76,65 @@ const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
 			<div className='flex gap-2'>
 				{/* Button Copy text in Bookmark */}
 				<Button
-					variant="secondary"
+					variant="alatagCopyText"
 					onClick={() => handleCopyToClipboard(bookmark.tags)}>
 					Copy text
 				</Button>
+
+
+				{/* Button Update Bookmark */}
+				<Dialog key={bookmark.tags[0]}>
+					<DialogTrigger asChild>
+						<Button
+							variant="alatagAdd"
+						>
+							<Pencil size={16} />
+						</Button>
+					</DialogTrigger>
+
+					<DialogContent className="sm:max-w-[425px]">
+
+						<div className='mb-4'>
+							{bookmark.tags.join(', ')}
+						</div>
+
+						{/* Form to add tag to the bookmark */}
+						<form
+							onSubmit={(e) => {
+								e.preventDefault();
+								handleFormSubmit(bookmark.bookmarkName);
+							}}
+							className="flex gap-3 mb-4"
+						>
+							<label>
+								<Input
+									type="text"
+									value={newTagForBookmark}
+									onChange={e => setNewTagForBookmark(e.target.value)}
+									placeholder="Enter new tag"
+								/>
+							</label>
+
+							<DialogFooter>
+								<Button
+									type="submit"
+								>
+									Add
+								</Button>
+							</DialogFooter>
+						</form>
+					</DialogContent>
+				</Dialog>
+				{/* End of Button Update Bookmark */}
 
 
 				{/* Button Delete Bookmark */}
 				<Dialog key={bookmark.bookmarkName}>
 					<DialogTrigger asChild>
 						<Button
-							variant="destructive"
+							variant="alatagDelete"
 						>
-							Delete
+							<Trash size={16} />
 						</Button>
 					</DialogTrigger>
 
@@ -139,53 +181,6 @@ const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
 					</DialogContent>
 				</Dialog>
 				{/* End of Delete Bookmark */}
-
-
-				{/* Button Update Bookmark */}
-				<Dialog key={bookmark.tags[0]}>
-					<DialogTrigger asChild>
-						<Button
-							variant="secondary"
-						>
-							Update
-						</Button>
-					</DialogTrigger>
-
-					<DialogContent className="sm:max-w-[425px]">
-
-						<div className='mb-4'>
-							{bookmark.tags.join(', ')}
-						</div>
-
-						{/* Form to add tag to the bookmark */}
-						<form
-							onSubmit={(e) => {
-								e.preventDefault();
-								handleFormSubmit(bookmark.bookmarkName);
-							}}
-							className="flex gap-3 mb-4"
-						>
-							<label>
-								<Input
-									type="text"
-									value={newTagForBookmark}
-									onChange={e => setNewTagForBookmark(e.target.value)}
-									placeholder="Enter new tag"
-								/>
-							</label>
-
-							<DialogFooter>
-								<Button
-									type="submit"
-								>
-									Add
-								</Button>
-							</DialogFooter>
-						</form>
-					</DialogContent>
-				</Dialog>
-				{/* End of Button Update Bookmark */}
-
 			</div>
 		</div>
 	)

@@ -15,6 +15,9 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from './ui/input';
 
+// Import icons from lucide-react
+import { Trash, Plus } from 'lucide-react';
+
 
 type TagSectionProps = {
 	section: {
@@ -152,9 +155,9 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 	return (
 		<div className='mb-10 pb-10 border-b border-gray-400'>
 
-			<div className='font-bold mb-4 text-2xl flex justify-between items-center'>
-				<div className='flex gap-3 items-center'>
-					<p>
+			<div className='mb-4'>
+				<div className='flex gap-5 items-center'>
+					<p className='font-bold text-2xl'>
 						{section.sectionName}
 					</p>
 
@@ -163,7 +166,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 						<DialogTrigger asChild>
 							<Button
 								disabled={isDeleteSectionMode}
-								variant="secondary"
+								variant="alatagAdd"
 							>
 								Change section name
 							</Button>
@@ -269,25 +272,27 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 						value={addTagValue}
 						onChange={handleInputChange}
 						disabled={isDeleteSectionMode || isDeleteMode}
-						className="border rounded px-2 py-1"
+						className="border-2 border-gray-400 rounded px-2 py-1"
+						placeholder="Add new tag"
 					/>
 
 					{/* Button Add new tag */}
 					<Button
 						type="submit"
 						disabled={isDeleteSectionMode || isDeleteMode}
+						variant="alatagAdd"
 					>
-						Add new tag
+						<Plus size={16} />
 					</Button>
 				</form>
 
 				{/* Button Delete tag */}
 				<Button
 					onClick={handleDeleteClick}
-					variant={isDeleteMode ? 'default' : 'destructive'}
+					variant={isDeleteMode ? 'default' : 'alatagDelete'}
 					disabled={isDeleteSectionMode}
 				>
-					{isDeleteMode ? 'Done' : 'Delete tag'}
+					{isDeleteMode ? 'Done' : <Trash size={16} />}
 				</Button>
 
 				{/* Button Delete all tags */}
@@ -295,9 +300,9 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 					<DialogTrigger asChild>
 						<Button
 							disabled={isDeleteSectionMode}
-							variant="destructive"
+							variant="alatagDelete"
 						>
-							Delete all tags
+							<Trash size={16} className='mr-1' /> all
 						</Button>
 					</DialogTrigger>
 
