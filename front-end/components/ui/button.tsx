@@ -18,9 +18,10 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        alatagDelete: "bg-white text-black border-2 border-red-500 hover:bg-gray-50",
-        alatagAdd: "bg-white text-black border-2 border-black hover:bg-gray-50",
-        alatagCopyText: "bg-white text-black border-2 border-green-500 hover:bg-gray-50",
+        alatagDelete: "bg-white text-black hover:bg-red-300",
+        alatagAdd: "bg-white text-black hover:bg-green-300",
+        alatagEdit: "bg-white text-black hover:bg-blue-200",
+        alatagCopyText: "bg-white text-black hover:bg-gray-200",
       },
       size: {
         default: "h-10 px-4 py-2",

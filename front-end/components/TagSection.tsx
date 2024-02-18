@@ -166,7 +166,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 						<DialogTrigger asChild>
 							<Button
 								disabled={isDeleteSectionMode}
-								variant="alatagAdd"
+								variant="alatagEdit"
 							>
 								Change section name
 							</Button>
@@ -258,7 +258,7 @@ const TagSection: React.FC<TagSectionProps> = ({ section, isDeleteSectionMode })
 
 			</div>
 
-			<div className='flex gap-3'>
+			<div className='flex gap-1'>
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();

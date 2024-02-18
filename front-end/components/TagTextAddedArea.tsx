@@ -44,8 +44,8 @@ const TagTextAddedArea = () => {
 
 	return (
 		<div className='flex flex-col gap-3'>
-			<p className='mb-2'>Tag text:
-				<span className='font-bold'>
+			<p className='mb-2 text-lg'>Tag text:
+				<span className='font-bold ml-1'>
 					{tags[0] == "" ? "0" : tags.length}
 				</span>
 			</p>
@@ -54,7 +54,7 @@ const TagTextAddedArea = () => {
 				{tagTextAdded}
 			</p>
 
-			<div className='flex gap-2'>
+			<div className='flex gap-1 justify-end'>
 				{/* Button Copy text */}
 				<Button
 					onClick={handleCopyToClipboard}

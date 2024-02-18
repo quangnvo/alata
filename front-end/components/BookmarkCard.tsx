@@ -73,20 +73,21 @@ const BookmarkCard: React.FC<BookmarkCardProps> = ({ bookmark }) => {
 			</div>
 
 
-			<div className='flex gap-2'>
+			<div className='flex gap-1 justify-end'>
 				{/* Button Copy text in Bookmark */}
 				<Button
 					variant="alatagCopyText"
-					onClick={() => handleCopyToClipboard(bookmark.tags)}>
+					onClick={() => handleCopyToClipboard(bookmark.tags)}
+				>
 					Copy text
 				</Button>
 
 
-				{/* Button Update Bookmark */}
+				{/* Button Update, Edit Bookmark */}
 				<Dialog key={bookmark.tags[0]}>
 					<DialogTrigger asChild>
 						<Button
-							variant="alatagAdd"
+							variant="alatagEdit"
 						>
 							<Pencil size={16} />
 						</Button>

@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/dialog"
 
 // Import icon from lucide-react
-import { Trash } from 'lucide-react';
+import { Trash, Plus } from 'lucide-react';
 
 
 const TagBoard = () => {
@@ -44,6 +44,13 @@ const TagBoard = () => {
 	// Render UI for TagBoard
 	return (
 		<div>
+			<div className='mb-10'>
+				<h1 className='font-bold mb-3'>Viec can lam</h1>
+				<ul className='list-disc'>
+					<li className='text-red-500'>Task - Add the popup after copy text successful</li>
+				</ul>
+			</div>
+
 			<div className='flex gap-2'>
 				{/* Button Add new section */}
 				<Dialog>
@@ -52,7 +59,7 @@ const TagBoard = () => {
 							disabled={isDeleteSectionMode}
 							variant="alatagAdd"
 						>
-							Add new section
+							<Plus size={16} className='mr-1' />  section
 						</Button>
 					</DialogTrigger>
 
@@ -96,7 +103,7 @@ const TagBoard = () => {
 				{/* End of Button Delete section */}
 			</div>
 
-			<div className="grid grid-cols-12 gap-4">
+			<div className="grid grid-cols-12 gap-16">
 				{/* Tag sections */}
 				<div className='col-span-6'>
 
