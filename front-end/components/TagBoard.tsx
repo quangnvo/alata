@@ -43,13 +43,13 @@ const TagBoard = () => {
 			<div className='mb-5'>
 				<p className='font-bold text-lg mb-2'>Viec can lam</p>
 				<ul className='list-disc list-inside space-y-2'>
-					<li className='text-blue-600'>Button - Clear all</li>
-					<li className='text-blue-600'>Button - Add bookmark</li>
-					<li className='text-blue-600'>Button - Delete bookmark</li>
-					<li className='text-blue-600'>Button - Update bookmark</li>
-					<li className='text-blue-600'>Fix bug - Cố định text area</li>
-					<li className='text-blue-600'>Fix bug - Add tag bị lỗi "1" và "  1" bị hiểu là khác nhau</li>
-					<li className='text-blue-600'>Fix bug - Cố định text area</li>
+					<li className='text-blue-600'>Button - Clear all - DONE</li>
+					<li className='text-blue-600'>Button - Add bookmark - DONE</li>
+					<li className='text-blue-600'>Button - Delete bookmark - DONE</li>
+					<li className='text-red-600'>Button - Update bookmark</li>
+					<li className='text-red-600'>Fix bug - Cố định text area</li>
+					<li className='text-red-600'>Fix bug - Add tag bị lỗi "1" và "  1" bị hiểu là khác nhau</li>
+					<li className='text-red-600'>Fix bug - Cố định text area</li>
 				</ul>
 			</div>
 
